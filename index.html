@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quem é a melhor personalidade negra?</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f4f4f4;--surface:#ffffff;--text:#171717;--muted:#666666;
+  --border:#dedede;--accent:#111111;--accent-contrast:#ffffff;
+  --soft:#ededed;--bar:#d5d5d5;--positive:#17663b;--negative:#b42318;
+  --shadow:0 14px 36px rgba(0,0,0,.07);
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0b0b0b;--surface:#171717;--text:#f5f5f5;--muted:#b6b6b6;
+  --border:#333333;--accent:#ffffff;--accent-contrast:#111111;
+  --soft:#252525;--bar:#393939;--positive:#75d69b;--negative:#ff9188;
+  --shadow:0 14px 36px rgba(0,0,0,.24);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;transition:background .2s,color .2s}
+main{max-width:1080px;margin:0 auto;padding:22px 20px 48px}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.2;margin:0 0 9px}
+h1{font-size:clamp(1.7rem,4vw,2.35rem);letter-spacing:-.025em;margin-top:26px}
+h2{font-size:1.45rem}h3{font-size:1.18rem}
+h1:focus,h2:focus{outline:none}
+p{margin:0 0 11px}
+.mut{color:var(--muted);font-size:.93rem}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:20px}
+.marca{display:flex;align-items:center;gap:10px;font-size:.76rem;font-weight:800;letter-spacing:.13em;color:var(--muted)}
+.marca-simbolo{display:grid;place-items:center;width:36px;height:36px;background:var(--text);color:var(--bg);border-radius:50%;font-size:1.1rem;letter-spacing:0}
+button,input{font:inherit;color:inherit}
+button{min-height:48px;padding:11px 16px;border-radius:12px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-contrast);font-weight:700;cursor:pointer;width:100%;transition:transform .15s,opacity .15s,background .2s,border-color .2s}
+button:hover:not(:disabled){transform:translateY(-1px)}
+button:disabled{opacity:.55;cursor:wait}
+button.sec{background:transparent;color:var(--text);border-color:var(--border)}
+.theme-toggle{width:auto;min-height:42px;padding:8px 13px;border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:999px;font-size:.88rem}
+#icone-tema{font-size:1.05rem;margin-right:5px}
+.manifesto{position:relative;isolation:isolate;overflow:hidden;min-height:240px;padding:clamp(26px,5vw,48px);border-radius:24px;background:#080808;color:#fff;box-shadow:var(--shadow);margin-bottom:30px}
+.manifesto:before{content:"";position:absolute;z-index:-1;width:290px;height:290px;border:1px solid rgba(255,255,255,.22);border-radius:50%;right:-72px;top:-115px;box-shadow:0 0 0 25px rgba(255,255,255,.035),0 0 0 55px rgba(255,255,255,.025)}
+.manifesto:after{content:"";position:absolute;z-index:-1;width:130px;height:130px;border:1px solid rgba(255,255,255,.15);border-radius:50%;right:90px;bottom:-95px}
+.manifesto .eyebrow{display:inline-block;margin-bottom:15px;color:#cfcfcf;font-size:.75rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+.manifesto h2{max-width:700px;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:clamp(2.1rem,6vw,4.2rem);font-weight:900;line-height:.98;letter-spacing:-.055em;margin-bottom:15px}
+.manifesto p{max-width:650px;color:#e0e0e0;font-size:1rem;margin-bottom:0}
+.manifesto .manifesto-assinatura{margin-top:17px;color:#aaa;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;font-weight:700}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:20px;margin:0 0 16px;box-shadow:var(--shadow)}
+#s-login{max-width:540px;margin:22px auto 0}
+label{display:block;font-size:.9rem;font-weight:700;margin-bottom:4px}
+input{width:100%;min-height:50px;padding:11px 13px;border-radius:12px;border:1px solid var(--border);background:var(--bg);margin:6px 0 13px}
+:focus-visible{outline:3px solid var(--muted);outline-offset:3px}
+#msg{min-height:1.5em;margin:0 0 13px;font-weight:650}
+#msg.err{color:var(--negative)}#msg.ok{color:var(--positive)}
+#lista{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,390px),1fr));gap:14px;margin-top:16px}
+#lista .card{margin:0;padding:17px}
+.pessoa{display:flex;gap:15px;align-items:center;margin-bottom:13px;min-width:0}
+.foto{width:104px;height:120px;border-radius:13px;flex:none;object-fit:cover;background:var(--soft);display:flex;align-items:center;justify-content:center;font:700 1.4rem Georgia,serif;color:var(--text);border:1px solid var(--border)}
+.pessoa h3{margin-bottom:5px;font-size:1.15rem}
+.cred{font-size:.73rem;color:var(--muted)}
+.opt{margin:0 0 10px;text-align:left;background:var(--surface);color:var(--text);border-color:var(--border);font-weight:600;line-height:1.4}
+#s-quiz{max-width:720px;margin:22px auto}
+.linha{margin:0 0 15px}
+.linha .topo{display:flex;justify-content:space-between;gap:12px;font-size:.93rem}
+.trilho{height:13px;background:var(--bar);border-radius:99px;overflow:hidden;margin-top:6px}
+.trilho span{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .3s}
+#s-placar{max-width:800px;margin:24px auto}
+#descartados{margin:18px 0;color:var(--muted);font-size:.9rem}
+.rodape{padding:24px 4px 0;text-align:center;color:var(--muted);font-size:.75rem}
+[hidden]{display:none!important}
+@media(max-width:560px){
+  main{padding:14px 13px 36px}.topbar{margin-bottom:14px}.marca{font-size:.64rem;letter-spacing:.1em}.marca-simbolo{width:32px;height:32px}
+  .theme-toggle{font-size:.8rem;padding:7px 10px}.manifesto{border-radius:19px;min-height:220px;padding:25px 21px}.manifesto h2{font-size:2.55rem}
+  .card{padding:16px;border-radius:15px}#lista{grid-template-columns:1fr;gap:11px}#lista .card{padding:14px}.foto{width:88px;height:105px}
+  .linha .topo{font-size:.82rem}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<header class="topbar">
+  <div class="marca"><span class="marca-simbolo" aria-hidden="true">✊</span><span>MEMÓRIA · RESISTÊNCIA · FUTURO</span></div>
+  <button id="b-tema" class="theme-toggle" type="button" aria-label="Ativar modo escuro" aria-pressed="false"><span id="icone-tema" aria-hidden="true">☾</span><span id="tema-label">Modo escuro</span></button>
+</header>
+<section class="manifesto" aria-label="Mensagem sobre igualdade racial">
+  <span class="eyebrow">Respeito · História · Igualdade</span>
+  <h2>VIDAS NEGRAS IMPORTAM.</h2>
+  <p>Celebrar histórias, reconhecer contribuições e valorizar quem transformou a sociedade. Igualdade racial também se constrói com memória, conhecimento e respeito.</p>
+  <p class="manifesto-assinatura">Conhecer o passado fortalece o futuro.</p>
+</section>
+<h1 id="titulo" tabindex="-1">Quem é a melhor personalidade negra?</h1>
+<p class="mut">A matrícula serve só para garantir um voto por aluno.</p>
+<p id="msg" role="status" aria-live="polite"></p>
+
+<section id="s-login" class="card">
+  <h2>Entrar</h2>
+  <label for="mat">Número de matrícula</label>
+  <input id="mat" inputmode="numeric" autocomplete="off" maxlength="20">
+  <button id="b-entrar">Entrar</button>
+  <p></p>
+  <button id="b-placar1" class="sec">Ver placar</button>
+</section>
+
+<section id="s-lista" hidden>
+  <h2 tabindex="-1">Escolha sua personalidade</h2>
+  <p class="mut">Atenção: você tem uma única tentativa. Ao tocar em votar, a matrícula é usada e a pergunta de validação aparece.</p>
+  <div id="lista"></div>
+  <button id="b-placar2" class="sec">Ver placar sem votar</button>
+</section>
+
+<section id="s-quiz" class="card" hidden>
+  <h2 tabindex="-1">Pergunta de validação</h2>
+  <p id="q-nome" class="mut"></p>
+  <p><strong>Qual destas frases é verdadeira sobre essa pessoa?</strong></p>
+  <div id="opcoes"></div>
+</section>
+
+<section id="s-placar" hidden>
+  <h2 tabindex="-1">Placar</h2>
+  <p class="mut">Percentuais calculados só com votos válidos.</p>
+  <div id="barras"></div>
+  <p id="descartados"></p>
+  <button id="b-voltar" class="sec" hidden>Voltar</button>
+</section>
+<footer class="rodape">Retratos hospedados no Wikimedia Commons. A imagem de Zumbi dos Palmares é uma representação artística, pois não existe fotografia de sua época.</footer>
+</main>
+
+<script>
+/* ===== CONFIGURAÇÃO DO SUPABASE (cole aqui; use SOMENTE a chave pública) ===== */
+const SUPABASE_URL = "https://rowvyfapqupfkduenwgf.supabase.co";   // ex.: https://abcdxyz.supabase.co
+const SUPABASE_KEY = "sb_publishable_R6L4lSWtDUoYgKmFVCIx8A_FlrRKQNc";    // publishable key (sb_publishable_...) ou anon key
+/* ============================================================================= */
+
+/* ===== PERSONALIDADES (edite à vontade; funciona com 2 a 40 itens) =====
+   foto: caminho/URL da imagem (vazio = círculo com iniciais). creditoFoto: fonte e licença. */
+const PERSONALIDADES = [
+{nome:"Carolina Maria de Jesus",anos:"1914–1977",papel:"Escritora",foto:"https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Carolina_Maria_de_Jesus%2C_1960_cr.jpg/330px-Carolina_Maria_de_Jesus%2C_1960_cr.jpg",creditoFoto:"Wikimedia Commons",
+ bio:"Catadora de papel e moradora da favela do Canindé, em São Paulo, transformou o cotidiano em literatura.",
+ fatoVerdadeiro:"Publicou o livro \"Quarto de Despejo\" em 1960.",
+ fatosFalsos:["Foi a primeira mulher presidente da Academia Brasileira de Letras.","Escreveu seu diário morando em Paris.","Venceu o Prêmio Nobel de Literatura em 1960."],autor:"Aluno(a) 01"},
+{nome:"Conceição Evaristo",anos:"1946–",papel:"Escritora",foto:"https://upload.wikimedia.org/wikipedia/commons/a/a9/Concei%C3%A7%C3%A3o_Evaristo%2C_September_2024.jpg",creditoFoto:"Wikimedia Commons",
+ bio:"Nascida em Belo Horizonte, é referência da literatura brasileira contemporânea.",
+ fatoVerdadeiro:"Criou o conceito de \"escrevivência\".",
+ fatosFalsos:["Recebeu o Prêmio Nobel de Literatura.","Nasceu em Salvador e nunca morou em Minas Gerais.","Publicou o romance \"Ponciá Vicêncio\" em 1920."],autor:"Aluno(a) 02"},
+{nome:"Lélia Gonzalez",anos:"1935–1994",papel:"Filósofa e ativista",foto:"https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/L%C3%A9lia_Gonzalez_by_Cezar_Loureiro.jpg/330px-L%C3%A9lia_Gonzalez_by_Cezar_Loureiro.jpg",creditoFoto:"Wikimedia Commons",
+ bio:"Intelectual que uniu raça, gênero e classe na análise da sociedade brasileira.",
+ fatoVerdadeiro:"Foi uma das fundadoras do Movimento Negro Unificado, em 1978.",
+ fatosFalsos:["Foi a primeira mulher a governar o estado do Rio de Janeiro.","Nasceu na Alemanha.","Era engenheira e projetou o metrô do Rio de Janeiro."],autor:"Aluno(a) 03"},
+{nome:"Milton Santos",anos:"1926–2001",papel:"Geógrafo",foto:"https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Milton_Santos_%28TV_Brasil%29.jpg/330px-Milton_Santos_%28TV_Brasil%29.jpg",creditoFoto:"Wikimedia Commons",
+ bio:"Baiano de Brotas de Macaúbas, é um dos geógrafos mais respeitados do mundo.",
+ fatoVerdadeiro:"Recebeu o Prêmio Vautrin Lud, em 1994, conhecido como o \"Nobel\" da Geografia.",
+ fatosFalsos:["Foi o primeiro astronauta brasileiro.","Ganhou o Prêmio Nobel de Física.","Nasceu em Porto Alegre."],autor:"Aluno(a) 04"},
+{nome:"Abdias do Nascimento",anos:"1914–2011",papel:"Ativista, artista e político",foto:"https://upload.wikimedia.org/wikipedia/commons/6/6c/Abdias_do_Nascimento_senador.jpg",creditoFoto:"Wikimedia Commons",
+ bio:"Dedicou a vida à luta antirracista, à cultura negra e à política.",
+ fatoVerdadeiro:"Fundou o Teatro Experimental do Negro, em 1944.",
+ fatosFalsos:["Foi técnico da seleção brasileira na Copa de 1970.","Foi o primeiro presidente negro do Brasil.","Fundou a Academia Brasileira de Letras."],autor:"Aluno(a) 05"},
+{nome:"Zumbi dos Palmares",anos:"1655–1695",papel:"Líder quilombola",foto:"https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Ant%C3%B4nio_Parreiras_-_Zumbi_2.jpg/330px-Ant%C3%B4nio_Parreiras_-_Zumbi_2.jpg",creditoFoto:"Wikimedia Commons",
+ bio:"Símbolo da resistência à escravidão no Brasil colonial.",
+ fatoVerdadeiro:"Foi um dos principais líderes do Quilombo dos Palmares, no século XVII.",
+ fatosFalsos:["Foi o primeiro imperador do Brasil.","Liderou a Inconfidência Mineira.","Morreu em 1888, quando a escravidão foi abolida."],autor:"Aluno(a) 06"},
+{nome:"Luiz Gama",anos:"1830–1882",papel:"Advogado e abolicionista",foto:"https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Luiz_Gama.jpg/330px-Luiz_Gama.jpg",creditoFoto:"Wikimedia Commons",
+ bio:"Nascido livre, foi escravizado ainda criança e depois conquistou a liberdade.",
+ fatoVerdadeiro:"Mesmo sem diploma de Direito, atuou na Justiça para libertar centenas de pessoas escravizadas.",
+ fatosFalsos:["Foi o primeiro presidente da República.","Era fazendeiro e defendia a escravidão.","Nasceu em Portugal e nunca viveu no Brasil."],autor:"Aluno(a) 07"},
+{nome:"André Rebouças",anos:"1838–1898",papel:"Engenheiro e abolicionista",foto:"https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Andr%C3%A9_Pinto_Rebou%C3%A7as%2C_da_cole%C3%A7%C3%A3o_Museu_Hist%C3%B3rico_Nacional%2C_Brasil.jpg/330px-Andr%C3%A9_Pinto_Rebou%C3%A7as%2C_da_cole%C3%A7%C3%A3o_Museu_Hist%C3%B3rico_Nacional%2C_Brasil.jpg",creditoFoto:"Wikimedia Commons",
+ bio:"Engenheiro do Império que defendeu o fim da escravidão e reformas sociais.",
+ fatoVerdadeiro:"Acompanhou Dom Pedro II ao exílio após a Proclamação da República.",
+ fatosFalsos:["Foi o primeiro presidente da República do Brasil.","Projetou a cidade de Brasília.","Era fazendeiro e contrário à abolição."],autor:"Aluno(a) 08"},
+{nome:"Maria Firmina dos Reis",anos:"1822–1917",papel:"Escritora e professora",foto:"https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/Maria_firmina_%28detailed%29.jpg/330px-Maria_firmina_%28detailed%29.jpg",creditoFoto:"Wikimedia Commons",
+ bio:"Maranhense, foi educadora e pioneira da literatura de denúncia da escravidão.",
+ fatoVerdadeiro:"Publicou o romance \"Úrsula\", em 1859, um marco da literatura abolicionista brasileira.",
+ fatosFalsos:["Nasceu em Londres.","Escreveu o romance \"Dom Casmurro\".","Foi presidente do Brasil."],autor:"Aluno(a) 09"},
+{nome:"Antonieta de Barros",anos:"1901–1952",papel:"Professora, jornalista e política",foto:"https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c3/Antonieta_de_Barros.webp/330px-Antonieta_de_Barros.webp",creditoFoto:"Wikimedia Commons",
+ bio:"Catarinense de Florianópolis, defendeu a educação como caminho de liberdade.",
+ fatoVerdadeiro:"Foi a primeira mulher negra a assumir um mandato parlamentar no Brasil, em Santa Catarina.",
+ fatosFalsos:["Foi a primeira presidente do Brasil.","Nasceu em Fortaleza e nunca morou em Santa Catarina.","Foi astronauta da NASA."],autor:"Aluno(a) 10"},
+{nome:"Ruth de Souza",anos:"1921–2019",papel:"Atriz",foto:"https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Ruth_de_Souza_%281968%29.tif/lossy-page1-330px-Ruth_de_Souza_%281968%29.tif.jpg",creditoFoto:"Wikimedia Commons",
+ bio:"Pioneira do teatro, do cinema e da televisão brasileiros.",
+ fatoVerdadeiro:"Em 1945, foi a primeira atriz negra a atuar no palco do Theatro Municipal do Rio de Janeiro.",
+ fatosFalsos:["Ganhou o Oscar de melhor atriz em 1954.","Nunca atuou no Brasil e fez carreira só na Europa.","Foi a primeira presidente do Supremo Tribunal Federal."],autor:"Aluno(a) 11"},
+{nome:"Sueli Carneiro",anos:"1950–",papel:"Filósofa e ativista",foto:"https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Sueli-carneiro-foto-andre-seiti-e1521580460291.jpg/330px-Sueli-carneiro-foto-andre-seiti-e1521580460291.jpg",creditoFoto:"Wikimedia Commons",
+ bio:"Nascida em São Paulo, é uma das principais vozes do feminismo negro no Brasil.",
+ fatoVerdadeiro:"Fundou o Geledés – Instituto da Mulher Negra, em 1988.",
+ fatosFalsos:["Foi ministra do Supremo Tribunal Federal.","Nasceu em Lisboa.","Fundou o Movimento dos Trabalhadores Rurais Sem Terra."],autor:"Aluno(a) 12"},
+{nome:"Machado de Assis",anos:"1839–1908",papel:"Escritor",foto:"https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Machado_de_Assis_by_Marc_Ferrez.jpg/330px-Machado_de_Assis_by_Marc_Ferrez.jpg",creditoFoto:"Wikimedia Commons",
+ bio:"Carioca, é considerado um dos maiores escritores da língua portuguesa.",
+ fatoVerdadeiro:"Foi o primeiro presidente da Academia Brasileira de Letras.",
+ fatosFalsos:["Nasceu em Lisboa.","Escreveu o romance \"O Cortiço\".","Nunca publicou romances, apenas poesia."],autor:"Aluno(a) 13"},
+{nome:"Pelé",anos:"1940–2022",papel:"Jogador de futebol",foto:"https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Pele_con_brasil_%28cropped%29.jpg/330px-Pele_con_brasil_%28cropped%29.jpg",creditoFoto:"Wikimedia Commons",
+ bio:"Edson Arantes do Nascimento é um dos maiores nomes da história do futebol.",
+ fatoVerdadeiro:"Conquistou três Copas do Mundo com a seleção brasileira (1958, 1962 e 1970).",
+ fatosFalsos:["Nasceu em Santos, São Paulo.","Jogou toda a carreira no Corinthians.","Foi técnico campeão mundial em 1994."],autor:"Aluno(a) 14"},
+{nome:"Elza Soares",anos:"1930–2022",papel:"Cantora",foto:"https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/Elza_Soares_recebendo_o_diploma_de_Embaixatriz_do_Samba_no_Museu_da_Imagem_e_do_Sim%2C_com_Garrincha_ao_fundo_%28cropped%29.tif/lossy-page1-330px-Elza_Soares_recebendo_o_diploma_de_Embaixatriz_do_Samba_no_Museu_da_Imagem_e_do_Sim%2C_com_Garrincha_ao_fundo_%28cropped%29.tif.jpg",creditoFoto:"Wikimedia Commons",
+ bio:"Carioca de origem humilde, construiu uma carreira de mais de seis décadas.",
+ fatoVerdadeiro:"Em 1999, foi eleita pela BBC de Londres a cantora brasileira do milênio.",
+ fatosFalsos:["Nasceu em Buenos Aires.","Nunca gravou um disco.","Foi a primeira presidente da CBF."],autor:"Aluno(a) 15"},
+{nome:"Marta Vieira da Silva",anos:"1986–",papel:"Jogadora de futebol",foto:"https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/NC_Courage_vs_Orlando_Pride_%28Jun_2024%29_073_%28cropped%29.jpg/330px-NC_Courage_vs_Orlando_Pride_%28Jun_2024%29_073_%28cropped%29.jpg",creditoFoto:"Wikimedia Commons",
+ bio:"Nascida em Dois Riachos, Alagoas, é um dos maiores nomes do futebol feminino.",
+ fatoVerdadeiro:"Foi eleita seis vezes a melhor jogadora do mundo pela Fifa.",
+ fatosFalsos:["Nunca jogou pela seleção brasileira.","Nasceu em Portugal.","Foi campeã da Copa do Mundo Feminina de 2007 com o Brasil."],autor:"Aluno(a) 16"},
+{nome:"Katherine Johnson",anos:"1918–2020",papel:"Matemática",foto:"https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Katherine_Johnson_1983.jpg/330px-Katherine_Johnson_1983.jpg",creditoFoto:"Wikimedia Commons",
+ bio:"Matemática norte-americana que trabalhou na NASA em uma época de forte segregação.",
+ fatoVerdadeiro:"Calculou trajetórias da NASA, incluindo a do voo orbital de John Glenn, em 1962.",
+ fatosFalsos:["Foi a primeira mulher a pisar na Lua.","Ganhou o Prêmio Nobel de Física em 1962.","Foi presidente da NASA."],autor:"Aluno(a) 17"},
+{nome:"Martin Luther King Jr.",anos:"1929–1968",papel:"Pastor e ativista",foto:"https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Martin_Luther_King%2C_Jr..jpg/330px-Martin_Luther_King%2C_Jr..jpg",creditoFoto:"Wikimedia Commons",
+ bio:"Principal líder do movimento pelos direitos civis nos Estados Unidos.",
+ fatoVerdadeiro:"Recebeu o Prêmio Nobel da Paz em 1964.",
+ fatosFalsos:["Foi presidente dos Estados Unidos entre 1961 e 1963.","Nasceu em Londres.","Morreu de causas naturais em 1990."],autor:"Aluno(a) 18"},
+{nome:"Nelson Mandela",anos:"1918–2013",papel:"Líder político",foto:"https://thumb.wikimedia.org/wikipedia/commons/thumb/0/02/Nelson_Mandela_1994.jpg/330px-Nelson_Mandela_1994.jpg",creditoFoto:"Wikimedia Commons",
+ bio:"Lutou contra o apartheid e foi preso por 27 anos.",
+ fatoVerdadeiro:"Foi eleito presidente da África do Sul em 1994, nas primeiras eleições multirraciais do país.",
+ fatosFalsos:["Foi presidente do Brasil.","Nasceu na Nigéria.","Ficou preso por apenas dois anos."],autor:"Aluno(a) 19"},
+{nome:"Angela Davis",anos:"1944–",papel:"Filósofa e ativista",foto:"https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Angela_Davis_in_a_half-length_portrait_by_Bernard_Gotfryd_-_crop.jpg/330px-Angela_Davis_in_a_half-length_portrait_by_Bernard_Gotfryd_-_crop.jpg",creditoFoto:"Wikimedia Commons",
+ bio:"Professora e ativista norte-americana, referência nas lutas antirracista e feminista.",
+ fatoVerdadeiro:"É autora do livro \"Mulheres, Raça e Classe\", publicado em 1981.",
+ fatosFalsos:["Foi a primeira mulher presidente dos Estados Unidos.","Nasceu em Salvador, no Brasil.","Foi astronauta da NASA."],autor:"Aluno(a) 20"}
+];
+/* ===== FIM DOS DADOS ===== */
+
+const $ = s => document.querySelector(s);
+function aplicarTema(tema){
+  document.documentElement.dataset.theme = tema;
+  const escuro = tema === "dark";
+  $("#icone-tema").textContent = escuro ? "☀" : "☾";
+  $("#tema-label").textContent = escuro ? "Modo claro" : "Modo escuro";
+  $("#b-tema").setAttribute("aria-pressed", String(escuro));
+  $("#b-tema").setAttribute("aria-label", escuro ? "Ativar modo claro" : "Ativar modo escuro");
+}
+let temaInicial = "light";
+try{ temaInicial = localStorage.getItem("tema-votacao") === "dark" ? "dark" : "light"; }catch(e){}
+aplicarTema(temaInicial);
+$("#b-tema").addEventListener("click", () => {
+  const novoTema = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  aplicarTema(novoTema);
+  try{ localStorage.setItem("tema-votacao", novoTema); }catch(e){}
+});
+const SECOES = ["s-login","s-lista","s-quiz","s-placar"];
+let matricula = "", token = "", ocupado = false, podeVoltar = false;
+
+function el(tag, cls, texto){ const e = document.createElement(tag); if(cls) e.className = cls; if(texto != null) e.textContent = texto; return e; }
+function msg(texto, tipo){ const m = $("#msg"); m.textContent = texto || ""; m.className = tipo || ""; }
+function mostrar(id){
+  SECOES.forEach(s => { $("#"+s).hidden = (s !== id); });
+  const h = $("#"+id+" h2"); if(h){ h.focus(); }
+  window.scrollTo(0,0);
+}
+function iniciais(nome){
+  const p = nome.split(" ").filter(w => /^[A-ZÀ-Ú]/.test(w) && w !== "Jr.");
+  return (p[0][0] + (p.length > 1 ? p[p.length-1][0] : "")).toUpperCase();
+}
+function embaralhar(a){
+  const r = a.slice();
+  for(let i = r.length-1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); [r[i], r[j]] = [r[j], r[i]]; }
+  return r;
+}
+function configurado(){ return SUPABASE_URL.startsWith("https://") && !SUPABASE_KEY.startsWith("COLE_"); }
+
+async function api(caminho, opcoes){
+  const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 12000);
+  try{
+    const r = await fetch(SUPABASE_URL + "/rest/v1/" + caminho, Object.assign({signal: ctl.signal,
+      headers: {"apikey": SUPABASE_KEY, "Content-Type": "application/json"}}, opcoes || {}));
+    if(!r.ok) throw new Error("http " + r.status);
+    return await r.json();
+  } finally { clearTimeout(t); }
+}
+const rpc = (nome, corpo) => api("rpc/" + nome, {method:"POST", body: JSON.stringify(corpo)});
+const FALHA = "Falha de conexão. Verifique a internet e tente de novo.";
+
+function desenharFoto(p){
+  const caixa = el("div","foto",iniciais(p.nome)); caixa.setAttribute("aria-hidden","true");
+  if(!p.foto) return caixa;
+  const img = el("img","foto"); img.alt = "Retrato de " + p.nome; img.loading = "lazy"; img.decoding = "async"; img.src = p.foto;
+  img.onerror = () => img.replaceWith(caixa);
+  return img;
+}
+function desenharLista(){
+  const box = $("#lista"); box.replaceChildren();
+  PERSONALIDADES.forEach((p, i) => {
+    const c = el("article","card");
+    const topo = el("div","pessoa");
+    topo.append(desenharFoto(p));
+    const t = el("div"); t.append(el("h3",null,p.nome), el("div","mut",p.anos + " — " + p.papel));
+    if(p.creditoFoto) t.append(el("div","cred","Foto: " + p.creditoFoto));
+    topo.append(t);
+    const b = el("button",null,"Votar em " + p.nome);
+    b.addEventListener("click", () => votar(p, i, b));
+    c.append(topo, el("p",null,p.bio), el("p","cred","Cadastrada por " + p.autor), b);
+    box.append(c);
+  });
+}
+
+async function entrar(){
+  if(ocupado) return;
+  if(!configurado()){ msg("Configure a URL e a chave do Supabase no topo do código.","err"); return; }
+  const m = $("#mat").value.replace(/\D/g,"");
+  if(m.length < 4){ msg("Digite o número da matrícula.","err"); return; }
+  ocupado = true; $("#b-entrar").disabled = true; msg("Verificando…");
+  try{
+    const r = await rpc("verificar_matricula", {p_matricula: m});
+    if(r.status === "nao_encontrada") msg("Matrícula não encontrada. Confira o número.","err");
+    else if(r.status === "ja_usada") msg("Essa matrícula já votou.","err");
+    else if(r.status === "ok"){ matricula = m; msg(""); desenharLista(); mostrar("s-lista"); }
+    else msg("Não foi possível verificar. Tente de novo.","err");
+  }catch(e){ msg(FALHA,"err"); }
+  finally{ ocupado = false; $("#b-entrar").disabled = false; }
+}
+
+async function votar(p, i, botao){
+  if(ocupado) return;
+  ocupado = true; botao.disabled = true; msg("Preparando a pergunta…");
+  try{
+    const r = await rpc("iniciar_tentativa", {p_matricula: matricula, p_personalidade: "p" + (i+1), p_correta: p.fatoVerdadeiro});
+    if(r.status === "ja_usada"){ msg("Essa matrícula já votou.","err"); mostrar("s-login"); return; }
+    if(r.status !== "ok"){ msg("Não foi possível iniciar o voto. Tente de novo.","err"); return; }
+    token = r.token; msg("");
+    $("#q-nome").textContent = "Você escolheu: " + p.nome;
+    const box = $("#opcoes"); box.replaceChildren();
+    embaralhar([p.fatoVerdadeiro].concat(p.fatosFalsos)).forEach(f => {
+      const b = el("button","opt",f);
+      b.addEventListener("click", () => responder(f));
+      box.append(b);
+    });
+    mostrar("s-quiz");
+  }catch(e){ msg(FALHA + " Se a matrícula aparecer como já usada, peça ao professor para liberá-la.","err"); }
+  finally{ ocupado = false; botao.disabled = false; }
+}
+
+async function responder(texto){
+  if(ocupado) return;
+  ocupado = true; document.querySelectorAll(".opt").forEach(b => b.disabled = true); msg("Conferindo…");
+  try{
+    const r = await rpc("responder_tentativa", {p_token: token, p_resposta: texto});
+    token = ""; matricula = "";
+    if(r.status === "validado") msg("Voto validado","ok");
+    else if(r.status === "descartado") msg("Voto descartado","err");
+    else msg("Não foi possível registrar a resposta.","err");
+    podeVoltar = false; await carregarPlacar();
+  }catch(e){
+    msg(FALHA + " Sua resposta ainda não foi registrada; toque em uma opção para tentar de novo.","err");
+    document.querySelectorAll(".opt").forEach(b => b.disabled = false);
+  }
+  finally{ ocupado = false; }
+}
+
+async function carregarPlacar(){
+  try{
+    const linhas = await api("votos?select=chave,total");
+    const mapa = {}; linhas.forEach(l => mapa[l.chave] = l.total);
+    const lista = PERSONALIDADES.map((p, i) => ({nome: p.nome, v: mapa["p" + (i+1)] || 0}));
+    const soma = lista.reduce((a, x) => a + x.v, 0);
+    lista.sort((a, b) => b.v - a.v);
+    const box = $("#barras"); box.replaceChildren();
+    lista.forEach(x => {
+      const pct = soma ? (x.v / soma * 100) : 0;
+      const l = el("div","linha"), t = el("div","topo");
+      t.append(el("span",null,x.nome), el("span",null, x.v + " (" + pct.toFixed(1).replace(".",",") + "%)"));
+      const tr = el("div","trilho"), s = el("span"); s.style.width = pct + "%"; tr.append(s);
+      l.append(t, tr); box.append(l);
+    });
+    $("#descartados").textContent = "Votos descartados: " + (mapa["descartados"] || 0) + " · Votos válidos: " + soma;
+    $("#b-voltar").hidden = !podeVoltar;
+    mostrar("s-placar");
+  }catch(e){ msg(FALHA,"err"); }
+}
+
+$("#b-entrar").addEventListener("click", entrar);
+$("#mat").addEventListener("keydown", e => { if(e.key === "Enter") entrar(); });
+$("#b-placar1").addEventListener("click", () => { podeVoltar = true; msg(""); carregarPlacar(); });
+$("#b-placar2").addEventListener("click", () => { podeVoltar = true; msg(""); carregarPlacar(); });
+$("#b-voltar").addEventListener("click", () => { msg(""); mostrar(matricula ? "s-lista" : "s-login"); });
+</script>
+</body>
+</html>
